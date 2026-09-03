@@ -20,7 +20,7 @@ Welcome to my EGR 304 Individual Data Sheet website.
 
 My name is Connor Erwin. This website will document my individual work, technical information, design decisions, and progress throughout EGR 304.
 
-The site will be updated throughout the semester as I complete additional assignments and project requirements.
+The site will be updated throughout the semester as I complete additional assignments and project requirements
 
 ### Project Summary
 
