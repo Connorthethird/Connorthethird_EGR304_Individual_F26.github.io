@@ -6,6 +6,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://embedded-systems-design.github.io/EGR304DataSheetTemplate/block-diagram/</loc>
+         <lastmod>2026-10-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://embedded-systems-design.github.io/EGR304DataSheetTemplate/01-Block-Diagram/Block-Diagram/</loc>
          <lastmod>2026-10-06</lastmod>
          <changefreq>daily</changefreq>
