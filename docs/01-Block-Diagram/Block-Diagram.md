@@ -1,24 +1,11 @@
----
-title: Individal Block Diagram
-tags:
-- tag1
-- tag2
----
+# Block Diagram
 
-## Overview
-This needs to be updated with a brief purpose for having the block diagram.
-Things to mention are:
-* power levels
-* sensor
-* Actuator
-* team connections
-* Power source
-* ...
+## Connor: Weight and Height Sensor Subsystem
 
-To get some initial formatting help, one can view ["here"](https://embedded-systems-design.github.io/EGR304DataSheetTemplate/Appendix/basic-markdown-examples/) some basic techniques.
+The following block diagram shows the electrical architecture of my subsystem for Team 101's Automatic Pet Food Dispenser.
 
+My subsystem is responsible for measuring pet food weight and height. The system uses a load cell with an instrumentation amplifier for weight measurement and a time-of-flight sensor for height measurement. Both sensor systems interface with the Microchip PIC18F57Q43 Curiosity Nano.
 
-## Example Block Diagram 
-Showing an example of how to import a screenshot of the block diagram created outside of git and brought into a page.
+The diagram also identifies the major components, manufacturer part numbers, microcontroller peripherals, signal types, signal directions, power requirements, and the connection to the team interface.
 
-![Example of Indivial Block diagram ](individual-block-diagram.png)
+![Connor Weight and Height Sensor Block Diagram](Connor_Block_Diagram_Clean.drawio.png)
