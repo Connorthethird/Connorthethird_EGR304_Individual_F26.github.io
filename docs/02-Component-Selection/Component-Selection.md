@@ -1,58 +1,514 @@
+
 ---
-title: Component Selection Example
+title: Component Selection
 ---
 
-## Examples
+# Component Selection
 
-### Style 1
+**Team 101: Automatic Pet Food Dispenser**
 
-> This is the example found in the assignment, uses more html
+**Student:** Connor
 
-*Table 1: Example component selection*
+**Subsystem:** Weight/Height Sensor
 
-**External Clock Module**
+## Project Overview
 
-| **Solution**                                                                                                                                                                                      | **Pros**                                                                                                                                    | **Cons**                                                                                            |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| ![](image1.png)<br>Option 1.<br> XC1259TR-ND surface mount crystal<br>$1/each<br>[link to product](http://www.digikey.com/product-detail/en/ECS-40.3-S-5PX-TR/XC1259TR-ND/827366)                 | \* Inexpensive[^1]<br>\* Compatible with PSoC<br>\* Meets surface mount constraint of project                                               | \* Requires external components and support circuitry for interface<br>\* Needs special PCB layout. |
-| ![](image3.png)<br>\* Option 2. <br>\* CTX936TR-ND surface mount oscillator <br>\* $1/each <br>\* [Link to product](http://www.digikey.com/product-detail/en/636L3I001M84320/CTX936TR-ND/2292940) | \* Outputs a square wave <br>\* Stable over operating temperature <br> \* Direct interface with PSoC (no external circuitry required) range | * More expensive <br>\* Slow shipping speed                                                         |
+The Weight/Height Sensor subsystem measures
+the weight of pet food dispensed into a bowl.
 
-**Choice:** Option 2: CTX936TR-ND surface mount oscillator
+The system uses a load cell, an MCP6004
+operational amplifier, and a regulated 5V
+power supply to provide an analog signal
+to the PIC18F57Q43 microcontroller.
 
-**Rationale:** A clock oscillator is easier to work with because it requires no external circuitry in order to interface with the PSoC. This is particularly important because we are not sure of the electrical characteristics of the PCB, which could affect the oscillation of a crystal. While the shipping speed is slow, according to the website if we order this week it will arrive within 3 weeks.
 
-### Style 2
+## 1. Load Cell Sensor
 
-> Also acceptable, more markdown friendly
+The load cell measures the weight of food
+dispensed into the pet's bowl. Three possible
+solutions were evaluated.
 
-**External Clock Module**
+| Solution | Pros | Cons |
+|---|---|---|
+| **Option 1: SparkFun TAL220B, 5kg** ($15.50) [View Product](https://www.sparkfun.com/load-cell-5kg-straight-bar-tal220b.html) | 5kg capacity; four-wire Wheatstone bridge; IP65 protection; documented mounting dimensions. | Higher cost; requires amplification; requires calibration and mechanical mounting. |
+| **Option 2: SparkFun TAL220, 10kg** ($12.95) [View Product](https://www.sparkfun.com/load-cell-10kg-straight-bar-tal220.html) | Higher weight capacity; documented specifications; IP66 protection; suitable for heavier bowls. | Lower sensitivity for small portions at similar rated output; requires amplification; mechanical mounting required. |
+| **Option 3: Adafruit 5kg Load Cell, 4541** ($3.95) [View Product](https://www.adafruit.com/product/4541) | Low cost; compact design; 5kg capacity; four-wire sensor. | Requires amplification; needs calibration; environmental protection requires verification. |
 
-1. XC1259TR-ND surface mount crystal
+### Selected Solution
 
-    ![](image1.png)
+**Option 1: SparkFun TAL220B, 5kg**
 
-    * $1/each
-    * [link to product](http://www.digikey.com/product-detail/en/ECS-40.3-S-5PX-TR/XC1259TR-ND/827366)
+### Selection Rationale
 
-    | Pros                                      | Cons                                                             |
-    | ----------------------------------------- | ---------------------------------------------------------------- |
-    | Inexpensive                               | Requires external components and support circuitry for interface |
-    | Compatible with PSoC                      | Needs special PCB layout.                                        |
-    | Meets surface mount constraint of project |
+The SparkFun TAL220B was selected because
+its 5kg capacity provides an appropriate
+starting measurement range for the automatic
+pet food dispenser.
 
-1. CTX936TR-ND surface mount oscillator
+Its documented specifications and mounting
+dimensions support integration into the
+mechanical design.
 
-    ![](image3.png)
+The sensor produces a differential signal
+that can be amplified by the MCP6004 before
+measurement by the PIC microcontroller.
 
-    * $1/each
-    * [Link to product](http://www.digikey.com/product-detail/en/636L3I001M84320/CTX936TR-ND/2292940)
+The final selection will be verified against
+the maximum expected bowl weight and
+required measurement resolution.
 
-    | Pros                                                              | Cons                |
-    | ----------------------------------------------------------------- | ------------------- |
-    | Outputs a square wave                                             | More expensive      |
-    | Stable over operating temperature                                 | Slow shipping speed |
-    | Direct interface with PSoC (no external circuitry required) range |
 
-**Choice:** Option 2: CTX936TR-ND surface mount oscillator
+## 2. Operational Amplifier
 
-**Rationale:** A clock oscillator is easier to work with because it requires no external circuitry in order to interface with the PSoC. This is particularly important because we are not sure of the electrical characteristics of the PCB, which could affect the oscillation of a crystal. While the shipping speed is slow, according to the website if we order this week it will arrive within 3 weeks.
+The operational amplifier conditions the small
+differential voltage generated by the load cell
+before it is measured by the microcontroller.
+
+Three quad operational amplifiers were compared.
+
+| Solution | Pros | Cons |
+|---|---|---|
+| **Option 1: Microchip MCP6004-I/P** ($0.60) [View Product](https://www.digikey.com/en/products/detail/microchip-technology/MCP6004-I-P/523060) | Four amplifiers in one IC; operates from 1.8V to 6V; rail-to-rail input and output; through-hole DIP-14 package; low input bias current. | Input offset voltage can affect precision; requires external feedback resistors; gain and calibration must be verified. |
+| **Option 2: Texas Instruments LM324N** ($0.58) [View Product](https://www.digikey.com/en/products/detail/texas-instruments/LM324N/277627) | Four amplifier channels; inexpensive; through-hole DIP-14 package; operates from a single 5V supply. | Not rail-to-rail; higher input offset and bias current; less suitable for signals approaching the positive supply rail. |
+| **Option 3: Texas Instruments TLV9004IPWR** ($0.85) [View Product](https://www.digikey.com/en/products/detail/texas-instruments/TLV9004IPWR/9674912) | Four amplifier channels; rail-to-rail input and output; low power consumption; operates from 1.8V to 5.5V; relatively low typical offset voltage. | Surface-mount TSSOP package is more difficult to solder; requires external resistors; smaller package complicates prototyping. |
+
+### Selected Solution
+
+**Option 1: Microchip MCP6004-I/P**
+
+### Selection Rationale
+
+The MCP6004 was selected because it provides
+four operational amplifier channels in one
+integrated circuit and operates from the
+regulated 5V power supply.
+
+Three channels can be configured as a
+differential instrumentation amplifier
+for the load-cell sensor.
+
+The through-hole DIP-14 package simplifies
+prototyping, assembly, and troubleshooting
+compared with the smaller surface-mount
+TLV9004 package.
+
+The rail-to-rail input and output capability
+is also beneficial for operation with a
+single 5V supply.
+
+The design uses external feedback resistors
+to establish the required amplifier gain.
+
+Before final hardware assembly, the amplifier
+gain, input offset error, common-mode range,
+and output voltage must be verified against
+the selected load cell and PIC ADC.
+
+
+## 3. Linear Voltage Regulator
+
+The Weight Sensor subsystem requires a regulated
+5V supply for the load cell and operational
+amplifier.
+
+The design uses a 9V DC external supply and
+a linear regulator to produce 5V.
+
+### Voltage Regulator Comparison
+
+| Solution | Pros | Cons |
+|---|---|---|
+| **Option 1: onsemi MC7805CTG** ($0.99) [View Product](https://www.digikey.com/en/products/detail/onsemi/MC7805CTG/919333) | Fixed 5V output; rated output current of 1A; TO-220 through-hole package; internal thermal and short-circuit protection; easy to integrate with existing schematic. | Dissipates heat when reducing 9V to 5V; requires bypass capacitors; not as efficient as a switching regulator. |
+| **Option 2: STMicroelectronics L7805CV** ($1.08) [View Product](https://www.digikey.com/en/products/detail/stmicroelectronics/L7805CV/585964) | Fixed 5V output; rated up to 1.5A with appropriate cooling; TO-220 package; thermal and short-circuit protection; widely available. | Produces heat during voltage conversion; requires bypass capacitors; increased current capability is unnecessary for a low-power sensor circuit. |
+| **Option 3: Texas Instruments LM340AT-5.0/NOPB** ($1.97) [View Product](https://www.digikey.com/en/products/detail/texas-instruments/LM340AT-5-0-NOPB/148173) | Regulated 5V output; 1.5A output rating with adequate thermal management; through-hole package; overcurrent and short-circuit protection. | Higher cost; generates heat; requires additional capacitors and thermal analysis. |
+
+### Selected Solution
+
+**Option 1: onsemi MC7805CTG**
+
+### Selection Rationale
+
+The MC7805CTG was selected because it provides
+a regulated 5V output using the available 9V DC
+input.
+
+Its TO-220 package is suitable for through-hole
+assembly and is compatible with the proposed
+linear regulator circuit.
+
+The 1A rated output current provides a useful
+design ceiling for the sensor electronics,
+although actual usable current is limited by
+thermal dissipation.
+
+The selected regulator also provides internal
+thermal protection and short-circuit protection.
+
+Compared with the alternative regulators,
+the MC7805CTG offers an appropriate combination
+of simplicity, cost, package size, and output
+requirements.
+
+### Supporting Circuit Components
+
+| Component | Value | Purpose |
+|---|---|---|
+| U1 | MC7805CTG | Converts 9V DC to 5V DC |
+| C1 | 0.33uF | Input bypass capacitor |
+| C2 | 0.1uF | Output bypass capacitor |
+| J1 | DC barrel jack | External 9V power connection |
+| PWR_FLAG | KiCad power flag | Identifies externally supplied power |
+
+The capacitor values are based on a standard
+7805 regulator application circuit.
+
+### Regulator Power Dissipation
+
+Linear regulators dissipate the voltage
+difference between their input and output
+as heat.
+
+Power dissipation can be estimated using:
+
+P = (Vin - Vout) x Iout
+
+At a 9V input and 5V output:
+
+P = (9 - 5) x Iout
+
+At a hypothetical 100mA load:
+
+P = 4 x 0.100 = 0.40W
+
+At a hypothetical 250mA load:
+
+P = 4 x 0.250 = 1.00W
+
+These examples do not represent measured
+system current.
+
+The regulator's actual power dissipation
+and required thermal management will be
+evaluated using the completed power budget.
+
+---
+
+## 4. External Power Supply
+
+The subsystem requires an external DC power
+source to supply the voltage regulator.
+
+A 9V DC wall adapter was selected as the
+proposed power source.
+
+The 9V adapter output connects to the barrel
+jack and then to the input of the MC7805CTG.
+
+### External Power Supply Comparison
+
+| Solution | Pros | Cons |
+|---|---|---|
+| **Option 1: Adafruit 9V 1A Adapter, Product 63** ($8.95) [View Product](https://www.adafruit.com/product/63) | Regulated 9V output; 1A current rating; center-positive 5.5mm x 2.1mm barrel connector; UL listed; compact wall adapter; documented specifications. | Limited to 1A; requires an appropriate PCB barrel jack; additional voltage regulation is required for 5V electronics. |
+| **Option 2: Pololu 1470, 9V 1A Adapter** ($11.41) [View Product](https://www.digikey.com/en/products/detail/pololu/1470/19200211) | Regulated 9V output; 1A rating; center-positive 5.5mm x 2.1mm barrel connector; 100-240V AC input; documented specifications. | Higher cost than Option 1; requires a matching barrel jack; maximum current is limited to 1A. |
+| **Option 3: Tensility 16-00138, 9V 2A Adapter** ($10.80) [View Product](https://www.digikey.com/en/products/detail/tensility-international-corp/16-00138/10324427) | 9V output; 2A current rating; barrel connector; UL-related approval; higher supply-current capacity for possible expansion. | Extra current capacity is unnecessary for the sensor alone; regulator heating still limits the 5V rail; connector compatibility must be verified. |
+
+### Selected Solution
+
+**Option 1: Adafruit 9V 1A Power Adapter**
+
+### Selection Rationale
+
+The Adafruit 9V 1A adapter was selected because
+it provides a regulated 9V DC output suitable
+for the input of the MC7805CTG regulator.
+
+Its center-positive barrel connector supports
+a common 5.5mm x 2.1mm power connection.
+
+The 1A current rating provides sufficient
+nominal capacity for the proposed low-power
+sensor electronics, subject to confirmation
+through the final power budget.
+
+The adapter is compact, commercially
+available, and supported by published
+product specifications.
+
+The selected supply also avoids the complexity
+of battery charging or battery replacement.
+
+The final design must use a barrel jack
+with matching dimensions, pinout, and polarity.
+
+---
+
+## 5. Barrel Jack Connection
+
+The barrel jack provides the electrical
+connection between the external wall adapter
+and the PCB.
+
+The proposed jack accepts a 5.5mm outer
+diameter and 2.1mm inner diameter plug.
+
+The design uses a center-positive connection.
+
+### Proposed Connections
+
+| Connection | Function |
+|---|---|
+| Center contact | +9V DC input |
+| Outer contact | Ground |
+| Switched contact | Unused |
+| Regulator input | +9V DC |
+| Regulator output | +5V DC |
+
+The schematic uses a switched barrel jack
+symbol with the unused switched contact
+marked as no-connect.
+
+Before PCB fabrication, the specific jack
+part number, pin numbering, and footprint
+must be checked against its manufacturer
+datasheet.
+
+A barrel jack is treated as an electrical
+connector rather than a major active
+component for the component-selection tables.
+
+---
+
+## 6. Signal Conditioning Circuit
+
+The load cell produces a differential
+voltage that is significantly smaller
+than the microcontroller's ADC input range.
+
+The MCP6004 is configured using three
+operational amplifiers.
+
+### First Amplification Stage
+
+Amplifier U2A receives the positive
+load-cell signal.
+
+Amplifier U2B receives the negative
+load-cell signal.
+
+Each amplifier uses a 10k feedback resistor.
+
+A 1k resistor connects the two
+inverting-input feedback nodes.
+
+The ideal differential gain of the
+first stage is:
+
+Gain = 1 + (2 x R) / Rg
+
+Where:
+
+R = 10,000 ohms
+
+Rg = 1,000 ohms
+
+Gain = 1 + (20,000 / 1,000)
+
+**First-stage gain = 21**
+
+### Differential Amplifier Stage
+
+Amplifier U2C subtracts the first-stage
+amplifier outputs.
+
+Four 10k resistors establish a nominal
+unity-gain difference amplifier.
+
+For the intended resistor arrangement:
+
+Vout = OUT_A - OUT_B
+
+### Combined Amplifier Gain
+
+The intended nominal total differential
+gain is approximately 21.
+
+The final gain must be verified using
+the selected load cell's rated sensitivity.
+
+The design must also account for
+input offset voltage, resistor tolerance,
+common-mode voltage, supply headroom,
+and ADC input voltage limits.
+
+For accurate low-weight measurements,
+additional gain, offset correction,
+or a dedicated load-cell amplifier
+may be required.
+
+### Unused Amplifier Channel
+
+The fourth MCP6004 amplifier channel,
+U2D, is configured as a voltage follower
+with its non-inverting input connected
+to ground.
+
+This prevents the unused amplifier
+inputs from floating.
+
+---
+
+## 7. Proposed Component Connections
+
+The proposed pin assignments for the
+Weight Sensor subsystem are shown below.
+
+### Load Cell Connector
+
+| Connector Pin | Signal | Connection |
+|---|---|---|
+| J2 Pin 1 | E+ | +5V |
+| J2 Pin 2 | E- | Ground |
+| J2 Pin 3 | S+ | U2A non-inverting input |
+| J2 Pin 4 | S- | U2B non-inverting input |
+
+These connector assignments are specific
+to the proposed design and must be checked
+against the selected sensor.
+
+### MCP6004 Amplifier
+
+| MCP6004 Pin | Function | Connection |
+|---|---|---|
+| 1 | U2A output | OUT_A |
+| 2 | U2A inverting input | R1 and R3 junction |
+| 3 | U2A non-inverting input | LOAD_CELL_S+ |
+| 4 | VDD | +5V |
+| 5 | U2B non-inverting input | LOAD_CELL_S- |
+| 6 | U2B inverting input | R2 and R3 junction |
+| 7 | U2B output | OUT_B |
+| 8 | U2C output | PIC analog input, proposed RA0 |
+| 9 | U2C inverting input | OUT_B through input resistor and output feedback |
+| 10 | U2C non-inverting input | OUT_A through input resistor and resistor to ground |
+| 11 | VSS | Ground |
+| 12 | U2D non-inverting input | Ground |
+| 13 | U2D inverting input | U2D output |
+| 14 | U2D output | Connected to pin 13 |
+
+### Voltage Regulator
+
+| Pin | Function | Connection |
+|---|---|---|
+| 1 | VI | 9V DC input |
+| 2 | Ground | Ground |
+| 3 | VO | Regulated 5V output |
+
+The physical pinout must be verified
+using the selected regulator datasheet.
+
+### Microcontroller Interface
+
+The conditioned weight signal is intended
+to connect to an analog input on the
+PIC18F57Q43 Curiosity Nano board.
+
+The block diagram proposes RA0.
+
+The final ADC channel assignment,
+input-voltage limits, and board power
+connections require verification using
+the Microchip documentation.
+
+---
+
+## 8. Power Budget Planning
+
+The electrical design uses two voltages:
+
+- 9V from the external wall adapter
+- 5V from the linear voltage regulator
+
+The load cell and MCP6004 operate
+from the regulated 5V rail.
+
+The microcontroller supply arrangement
+must be confirmed before final assembly.
+
+### Components Requiring Power
+
+| Component | Supply Voltage | Power Budget Status |
+|---|---|---|
+| Load cell | 5V excitation | Current to be calculated from bridge resistance |
+| MCP6004 | 5V | Maximum current to be obtained from datasheet |
+| PIC18F57Q43 Curiosity Nano | Board-dependent 5V power arrangement | Maximum current to be verified |
+| LED indicator | Design dependent | Current to be determined by LED and resistor |
+| MC7805CTG | 9V input, 5V output | Regulator efficiency and heating to be calculated |
+
+The voltage regulator and external
+power source are included in the
+appropriate power-budget sections
+rather than being treated as ordinary
+5V loads.
+
+The final power budget will include
+maximum operating currents and a
+25% current safety margin.
+
+The external supply and voltage
+regulator must both support the total
+required current.
+
+---
+
+## 9. Final Component Selections
+
+| Component | Selected Part | Purpose |
+|---|---|---|
+| Load cell | SparkFun TAL220B, 5kg | Measure food weight |
+| Operational amplifier | Microchip MCP6004-I/P | Amplify load-cell output |
+| Linear regulator | onsemi MC7805CTG | Convert 9V to 5V |
+| External power adapter | Adafruit Product 63, 9V 1A | Supply external DC power |
+| Barrel jack | 5.5mm x 2.1mm center-positive compatible jack, exact part pending | Connect external supply |
+| Input capacitor | 0.33uF | Regulator input bypass |
+| Output capacitor | 0.1uF | Regulator output bypass |
+| Amplifier bypass capacitor | 0.1uF | MCP6004 supply decoupling |
+| Amplifier resistors | 10k and 1k | Set amplifier gain |
+
+## 10. Design Summary
+
+The Weight Sensor subsystem uses a
+strain-gauge load cell to measure
+the amount of pet food dispensed.
+
+A three-amplifier signal conditioning
+circuit is implemented using the
+MCP6004 operational amplifier.
+
+The conditioned analog output is
+intended to be measured by the
+PIC18F57Q43 microcontroller.
+
+The proposed circuit uses an external
+9V DC wall adapter and an MC7805CTG
+linear voltage regulator to provide
+a regulated 5V supply.
+
+The selected components provide a
+practical starting design using
+commercially available parts with
+published technical specifications.
+
+Before physical implementation, the
+design must be validated through
+power-budget calculations, electrical
+simulation or testing, sensor
+calibration, thermal analysis,
+and verification of PCB footprints.
+
+The schematic has been checked using
+KiCad Electrical Rules Check.
+A successful ERC verifies connectivity
+rules but does not establish that
+the analog circuit meets its
+performance requirements.
+
+
