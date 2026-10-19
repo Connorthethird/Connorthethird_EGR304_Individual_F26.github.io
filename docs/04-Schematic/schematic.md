@@ -17,8 +17,9 @@ Weight/Height Sensor subsystem schematic.
 
 ### Complete KiCad Project ZIP
 
-The complete KiCad project ZIP will be linked
-here after uploading the project archive.
+
+[Download Complete KiCad Project ZIP](~Connor%20Subsystem.kicad_sch.zip)
+
 
 ## Design Verification
 
