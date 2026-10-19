@@ -522,3 +522,46 @@ the analog circuit meets its
 performance requirements.
 
 
+## Component Product Photo Gallery
+
+### Operational Amplifier Alternatives
+
+**Option 1: Microchip MCP6004-I/P**
+
+![Microchip MCP6004 Operational Amplifier](amp1.png)
+
+**Option 2: Texas Instruments LM324N**
+
+![Texas Instruments LM324N](amp2.png)
+
+**Option 3: Texas Instruments TLV9004IPWR**
+
+![Texas Instruments TLV9004](amp3.png)
+
+### Linear Voltage Regulator Alternatives
+
+**Option 1: onsemi MC7805CTG**
+
+![onsemi MC7805CTG Voltage Regulator](reg1.png)
+
+**Option 2: STMicroelectronics L7805CV**
+
+![STMicroelectronics L7805CV](reg2.png)
+
+**Option 3: Texas Instruments LM340AT-5.0**
+
+![Texas Instruments LM340AT Voltage Regulator](reg3.png)
+
+### External Power Supply Alternatives
+
+**Option 1: Adafruit 9V 1A Adapter**
+
+![Adafruit 9V Power Adapter](power%201.png)
+
+**Option 2: Pololu 9V 1A Adapter**
+
+![Pololu 9V Power Adapter](power%202.png)
+
+**Option 3: Tensility 9V 2A Adapter**
+
+![Tensility 9V Power Adapter](power3.png)
