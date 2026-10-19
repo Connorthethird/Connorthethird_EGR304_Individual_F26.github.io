@@ -23,6 +23,7 @@ to the PIC18F57Q43 microcontroller.
 
 
 ## 1. Load Cell Sensor
+![SparkFun TAL220B 5kg Load Cell](load%20cell.png)
 
 The load cell measures the weight of food
 dispensed into the pet's bowl. Three possible
