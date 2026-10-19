@@ -1,55 +1,36 @@
 
----
-title: Schematics
----
-
-# Schematics
-
-**Team 101: Automatic Pet Food Dispenser**
-
-**Student:** Connor
-
-**Subsystem:** Weight/Height Sensor
-
-## Individual Circuit Schematic
-
-The Weight/Height Sensor subsystem uses a
-load-cell sensor and MCP6004 operational
-amplifier to measure the weight of pet food.
-
-The conditioned sensor output connects to
-the PIC18F57Q43 Curiosity Nano microcontroller.
-
-A 9V external power supply and 5V linear
-voltage regulator provide power to the
-subsystem electronics.
 
 ## Complete KiCad Schematic
 
-![Connor Weight Sensor Schematic](Connor_Subsystem_Schematic.png)
+The following image shows the completed
+Weight/Height Sensor subsystem schematic.
+
+![Connor Weight Sensor Schematic](Screenshot.png)
 
 ## Project Files
 
-**High-Resolution Schematic PDF**
+### High-Resolution Schematic PDF
 
-[View or Download Schematic PDF](Connor_Subsystem_Schematic.pdf)
+[View or Download Schematic PDF](Connor%20Subsystem.pdf)
 
-**Complete KiCad Project ZIP**
+### Complete KiCad Project ZIP
 
-[Download KiCad Project ZIP](Connor_Subsystem_KiCad_Project.zip)
+The complete KiCad project ZIP will be linked
+here after uploading the project archive.
 
 ## Design Verification
 
-The schematic was created using KiCad 10.
+The schematic was developed using KiCad 10
+and includes the following:
 
-Electrical Rules Check was performed
-to identify electrical connectivity
-errors and warnings.
+- PIC18F57Q43 Curiosity Nano microcontroller
+- MCP6004 operational amplifier
+- Load-cell sensor connector
+- 9V input and 5V linear regulator
+- Supporting resistors and capacitors
 
-The schematic incorporates a load-cell
-interface, operational amplifier,
-voltage regulator, and microcontroller.
+Electrical Rules Check was performed to
+identify schematic connectivity errors.
 
-Further testing and calibration will
-be necessary to verify the physical
-circuit's operation.
+The design will require physical testing
+and calibration before implementation.
