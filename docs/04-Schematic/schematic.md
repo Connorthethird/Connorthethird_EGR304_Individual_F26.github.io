@@ -5,7 +5,9 @@
 The following image shows the completed
 Weight/Height Sensor subsystem schematic.
 
-![Connor Weight Sensor Schematic](Screenshot.png)
+
+![Connor Weight Sensor Schematic](Connor%20Subsystem.png)
+
 
 ## Project Files
 
