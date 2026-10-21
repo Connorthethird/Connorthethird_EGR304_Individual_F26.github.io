@@ -8,4 +8,4 @@ My subsystem is responsible for measuring pet food weight and height. The system
 
 The diagram also identifies the major components, manufacturer part numbers, microcontroller peripherals, signal types, signal directions, power requirements, and the connection to the team interface.
 
-![Connor Weight and Height Sensor Block Diagram](Connor_Block_Diagram_Clean.drawio.png)
+![Connor Block Diagram](../Connor_Block_Diagram.png)
