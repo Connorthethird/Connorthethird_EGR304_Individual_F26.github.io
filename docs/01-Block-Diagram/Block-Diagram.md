@@ -1,5 +1,5 @@
 # Block Diagram
-
+ 
 ## Connor: Weight and Height Sensor Subsystem
 
 The following block diagram shows the electrical architecture of my subsystem for Team 101's Automatic Pet Food Dispenser.
