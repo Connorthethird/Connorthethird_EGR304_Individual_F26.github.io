@@ -1,28 +1,46 @@
+
 ---
+layout: default
 title: Bill of Materials
-tags:
-- tag1
-- tag2
 ---
 
-## Overview
-written context
+# Bill of Materials
 
-## Bill of Materials Example (as Table)
+**Connor Erwin | EGR 304 | Team 101**
 
-*Table ##: An example of one approach to adding your BOM table to this section.*
+## Project Overview
 
-| **Part Name/Description** | **Qty** | **Unit Cost** | **Total Cost** | **Manufacture** | **Manufacturer #** | **Vendor Link** |**Datasheet Link** | **Schematic Reference Designators** |
-|:--------------------|:----|:---------------|:-----|:--------|:-----|:-----|:----|:-----|
-8-bit SIPO/SISO Shift Register, SOIC-16 package | 1 | $0.49 | $ 0.49 | NXP | 74HC595D,112 | [DigiKey](https://www.digikey.com/en/products/detail/nexperia-usa-inc/74HC595D-112/763550) | [datasheet link](https://assets.nexperia.com/documents/data-sheet/74HC_HCT595.pdf) | U1 |
-0.1 µF Ceramic Capacitor, +/-10%, X7R, 50V, 0805 package |10 | 0.2750 | $2.75 | KEMET | C0805F104K5RACTU | PRLTA 109 |n/a | C2, C4, C6, C7, C8, C9, C10, C11, C12, C16
+This Bill of Materials documents the weight-measurement subsystem for Team 101's Automatic Pet Food Dispenser. It includes parts from the team hardware order and Peralta 109.
 
-Note: Setting it up as a table is nice because it is completely viewable without scaling issues. <ins>Downside</ins> is that you have to do the math.
+## Component Bill of Materials
 
-* You could also import your BOM via a screenshot of the spreadsheet created BOM
+| Reference | Qty | Component / Value | Footprint | Source |
+|---|---:|---|---|---|
+| C1 | 1 | 0.33 µF, 50 V capacitor | 0805 SMD | Peralta 109 |
+| C2, C3, C5, C6 | 4 | 0.1 µF, 50 V capacitors | 0805 SMD | Peralta 109 |
+| D1 | 1 | Debug LED | 5 mm THT | Peralta 109 |
+| F1 | 1 | MF-R050 resettable fuse | Radial THT, verify | Peralta 109 |
+| J1 | 1 | DC barrel jack | Horizontal THT | Peralta 109 |
+| J2 | 1 | 4-pin load-cell header | 2.54 mm THT | Peralta 109 |
+| J3 | 1 | 8-pin team header | 2.54 mm THT | Peralta 109 |
+| R1, R2, R4–R7, R9 | 7 | 10 kΩ, 0.25 W, 1% | 0805 SMD | Peralta 109 |
+| R3, R8 | 2 | 1 kΩ, 0.25 W, 1% | 0805 SMD | Peralta 109 |
+| SW1 | 1 | Momentary push button | 6 mm THT | Peralta 109 |
+| TP1–TP3 | 3 | PCB test points | THT test pads | Peralta 109 |
+| U1 | 1 | LM7805 / L7805CV regulator | TO-220-3 | Team order |
+| U2 | 1 | MCP6004 quad op-amp | DIP-14 | Team order |
+| U4 | 1 | PIC18F57Q43 Curiosity Nano | Development board | Previously supplied / verify |
+| External sensor | 1 | SparkFun TAL220B, 5 kg load cell | External assembly | Team order |
 
-## Bill of Materials Example (as Image)
-![](BOM-Screenshot.png){style width: "2000"}
-**Figure 2:** Example Bill of Materials as a screenshot.
+**Total:** 26 schematic components plus the external load cell.
 
-As you can see, the text can be difficult to read without opening the image.
+## Purchasing and Inventory
+
+Major selected components are covered by the team's purchase request. Other components are available through Peralta 109. The complete BOM includes both purchased and lab-stock items.
+
+## Engineering Notes
+
+- R2's KiCad value and several resistor footprint fields need correction in the source schematic.
+- Final footprints must be checked against physical components.
+- Fuse current rating, regulator heating, and Curiosity Nano VTG/VOFF power configuration require verification.
+- Prices and exact manufacturer part numbers remain to be confirmed for lab-stock items.
