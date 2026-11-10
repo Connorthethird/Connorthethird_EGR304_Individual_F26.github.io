@@ -6,14 +6,14 @@ The following image shows the completed
 Weight/Height Sensor subsystem schematic.
 
 
-![Connor Updated Weight Sensor Schematic](./new%20schematic.png)
+![Connor Updated Weight Sensor Schematic](./Connor101_Schematic.png)
 
 
 ## Project Files
 
 ### High-Resolution Schematic PDF
 
-[View or Download Schematic PDF](Connor%20Subsystem.pdf)
+[View or Download Schematic PDF](./Connor%20Subsystem.pdf)
 
 ### Complete KiCad Project ZIP
 
